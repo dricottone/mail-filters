@@ -7,6 +7,7 @@
 
 BEGIN {
   highlight="\033[44m";
+  dim="\033[2m";
   cyan="\033[36m";
   reset="\033[0m";
 
