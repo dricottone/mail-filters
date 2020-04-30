@@ -33,7 +33,7 @@ BEGIN {
         $3=whitespace dim cyan $3;
         $0=$0 reset;
       }
-      else if ($0 ~ /^CVE ID\s*:/) {
+      else if ($0 ~ /^(CVE ID|Debian Bug)\s*:/) {
         whitespace=substr("                ",length($1)+length($2)+4)
         $4=whitespace dim cyan $4;
         $0=$0 reset;
