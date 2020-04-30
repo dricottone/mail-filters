@@ -14,8 +14,8 @@ BEGIN {
   comma_replacement=reset ", " highlight;
 }
 {
-  # stop processing at end of mail, marked by dashed line
-  if ($0 ~ /^-+\s*/) exit 0;
+  # stop processing at end of mail
+  if ($0 ~ /^You're receiving this email/) exit 0;
 
   if ($0 ~ /\([1-9][0-9]* words\)/) {
     matched=match($0, /\([1-9][0-9]* words\)/);
