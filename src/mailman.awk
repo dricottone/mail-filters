@@ -51,11 +51,11 @@ BEGIN {
     else if ($0 ~ /^(Message|Date|From|To|Subject|Message-ID):/) in_header=1;
 
     if (in_todays_topics==1) {
-      matched=match($0, /\(.+\)/);
+      matched=match($0, /\([^)]+\)/);
       if (matched!=0) {
         original=substr($0, RSTART, RLENGTH);
         replacement=reset original;
-        sub(/\(.+\)/,replacement);
+        sub(/\([^)]+\)/,replacement);
       }
       if ($0 ~ /^ +[1-9][0-9]?\./) {
         $1=$1 dim cyan;
