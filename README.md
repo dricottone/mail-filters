@@ -34,12 +34,13 @@ to,~.@lists.ubuntu.com   =path/to/ubuntu.awk
 to,~.@lists.debian.org   =path/to/debian.awk
 from,~.@freebsd.org      =path/to/freebsd.awk
 from,~.+@googlegroups.com=path/to/googlegroups.awk
-from,~.+@archlinux.org   =path/to/mailman.awk
-from,~.+@python.org      =path/to/mailman.awk
-from,~.+@gnu.org         =path/to/mailman.awk
+from,~.+@archlinux.org   =path/to/mailman.sh
+from,~.+@python.org      =path/to/mailman.sh
+from,~.+@gnu.org         =path/to/mailman.sh
 text/*                   =cat
 ```
 
+If possible, install [digestion](https://git.dominic-ricottone.com/digestion) as well. `mailman.sh` will automatically make use of it.
 
 
 ## Recommended mutt configuration
@@ -69,11 +70,11 @@ elif grep --quiet -e '^From:.*@freebsd.org' "$TMP"; then
 elif grep --quiet -e '^From:.*@googlegroups.com' "$TMP"; then
   cat "$TMP" | path/to/googlegroups.awk
 elif grep --quiet -e '^From:.*@archlinux.org' "$TMP"; then
-  cat "$TMP" | path/to/mailman.awk
+  cat "$TMP" | path/to/mailman.sh
 elif grep --quiet -e '^From:.*@python.org' "$TMP"; then
-  cat "$TMP" | path/to/mailman.awk
+  cat "$TMP" | path/to/mailman.sh
 elif grep --quiet -e '^From:.*@gnu.org' "$TMP"; then
-  cat "$TMP" | path/to/mailman.awk
+  cat "$TMP" | path/to/mailman.sh
 else
   cat "$TMP"
 fi

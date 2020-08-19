@@ -10,6 +10,7 @@ install:
 	install -m755 src/googlegroups.awk $(INSTALL_DIR)/googlegroups.awk
 	install -m755 src/html.sh $(INSTALL_DIR)/html.sh
 	install -m755 src/mailman.awk $(INSTALL_DIR)/mailman.awk
+	install -m755 src/mailman.sh $(INSTALL_DIR)/mailman.sh
 	install -m755 src/ubuntu.awk $(INSTALL_DIR)/ubuntu.awk
 
 uninstall:
@@ -20,6 +21,7 @@ uninstall:
 	rm $(INSTALL_DIR)/googlegroups.awk
 	rm $(INSTALL_DIR)/html.sh
 	rm $(INSTALL_DIR)/mailman.awk
+	rm $(INSTALL_DIR)/mailman.sh
 	rm $(INSTALL_DIR)/ubuntu.awk
 	rmdir $(INSTALL_DIR)
 
