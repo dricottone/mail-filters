@@ -3,21 +3,23 @@
 # fanfiction.awk
 # ==============
 # A filter (as for mutt or aerc) intended to clean & decorate plaintext mail
-# from FanFiction.net, highlighting descriptive information
+# from FanFiction.net, dim cyaning descriptive information
 
 BEGIN {
-  highlight="\033[44m";
   dim="\033[2m";
   cyan="\033[36m";
   reset="\033[0m";
 
-  comma_replacement=reset ", " highlight;
-  brace_replacement=reset "] " highlight;
+  skip=0;
+
+  comma_replacement=reset ", " dim cyan;
+  brace_replacement=reset "] " dim cyan;
   close_brace_replacement=reset "] ";
 }
 {
   # stop processing at end of mail, marked by website URL
-  if ($0 ~ /^FanFiction http/) exit 0;
+  if ($0 ~ /^FanFiction \[/) skip=1;
+  if ($0 ~ /^URLs:/) skip=0;
 
   if ($0 ~ /^New (story|chapter) from/) {
     $4=cyan $4;
@@ -29,10 +31,10 @@ BEGIN {
   }
   else if ($0 ~ /^Character:/) {
     if ($2 ~ /^\[/) {
-      $2="[" highlight substr($2,2);
+      $2="[" dim cyan substr($2,2);
     }
     else {
-      $2=highlight $2;
+      $2=dim cyan $2;
     }
     gsub(/, /,comma_replacement);
     gsub(/\] /,brace_replacement);
@@ -44,6 +46,6 @@ BEGIN {
     }
   }
 
-  print $0;
+  if (skip==0) print $0;
 }
 

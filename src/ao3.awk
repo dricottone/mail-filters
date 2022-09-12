@@ -6,16 +6,18 @@
 # from Archive of Our Own (AO3), highlighting descriptive information
 
 BEGIN {
-  highlight="\033[44m";
   dim="\033[2m";
   cyan="\033[36m";
   reset="\033[0m";
 
-  comma_replacement=reset ", " highlight;
+  skip=0;
+
+  comma_replacement=reset ", " dim cyan;
 }
 {
-  # stop processing at end of mail
-  if ($0 ~ /^You're receiving this email/) exit 0;
+  # skip footer
+  if ($0 ~ /^You're receiving this email/) skip=1;
+  if ($0 ~ /^URLs:/) skip=0;
 
   if ($0 ~ /\([1-9][0-9]* words\)/) {
     matched=match($0, /\([1-9][0-9]* words\)/);
@@ -40,15 +42,15 @@ BEGIN {
   }
   else if ($0 ~ /^(Relationships|Characters):/) {
     gsub(/, /,comma_replacement);
-    $2=highlight $2
+    $2=dim cyan $2
     $0=$0 reset
   }
   else if ($0 ~ /^Additional Tags:/) {
     gsub(/, /,comma_replacement);
-    $3=highlight $3
+    $3=dim cyan $3
     $0=$0 reset
   }
 
-  print $0;
+  if (skip==0) print $0;
 }
 

@@ -4,10 +4,13 @@
 # ==========
 # A filter (as for mutt or aerc) which runs digestion and an awk filter.
 
-if command -v /usr/local/share/mail-filters/digestion 2>&1 >/dev/null; then
-  /usr/local/share/mail-filters/digestion -length $(tput cols) \
-    | /usr/local/share/mail-filters/mailman.awk
+DIGESTION_INSTALL_DIR=/usr/local/bin
+MAILFILTERS_INSTALL_DIR=/usr/local/share/mail-filters
+
+if command -v $DIGESTION_INSTALL_DIR/digestion 2>&1 >/dev/null; then
+  $DIGESTION_INSTALL_DIR/digestion -length $(tput cols) \
+    | $MAILFILTERS_INSTALL_DIR/mailman.awk
 else
-    /usr/local/share/mail-filters/mailman.awk
+  $MAILFILTERS_INSTALL_DIR/mailman.awk
 fi
 

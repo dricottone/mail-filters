@@ -9,9 +9,8 @@ install:
 	install -m755 src/freebsd.awk $(INSTALL_DIR)/freebsd.awk
 	install -m755 src/googlegroups.awk $(INSTALL_DIR)/googlegroups.awk
 	install -m755 src/html.sh $(INSTALL_DIR)/html.sh
-	install -m755 src/mailman.awk $(INSTALL_DIR)/mailman.awk
 	install -m755 src/mailman.sh $(INSTALL_DIR)/mailman.sh
-	install -m755 src/ubuntu.awk $(INSTALL_DIR)/ubuntu.awk
+	install -m755 src/open-in-browser.sh $(INSTALL_DIR)/open-in-browser.sh
 
 uninstall:
 	rm $(INSTALL_DIR)/ao3.awk
@@ -20,8 +19,7 @@ uninstall:
 	rm $(INSTALL_DIR)/freebsd.awk
 	rm $(INSTALL_DIR)/googlegroups.awk
 	rm $(INSTALL_DIR)/html.sh
-	rm $(INSTALL_DIR)/mailman.awk
 	rm $(INSTALL_DIR)/mailman.sh
-	rm $(INSTALL_DIR)/ubuntu.awk
+	rm $(INSTALL_DIR)/open-in-browser.sh
 	rmdir $(INSTALL_DIR)
 

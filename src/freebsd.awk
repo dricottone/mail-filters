@@ -38,21 +38,6 @@ BEGIN {
       else if ($0 !~ /^=/) {
         $0=dim cyan $0 reset;
       }
-
-      # highlight release names
-      for (i=10; i<=12; i++) {
-        for (j=1; j<=4; j++) {
-          release=i "." j "-STABLE";
-          replacement=yellow release cyan;
-          gsub(release,replacement);
-
-          for (k=1; k<=9; k++) {
-            release=i "." j "-RELEASE-p" k;
-            replacement=yellow release cyan;
-            gsub(release,replacement);
-          }
-        }
-      }
     }
     else {
       # highlight section titles
@@ -65,21 +50,6 @@ BEGIN {
       # color syntax sections
       else if ($1=="#") {
         $0=cyan $0 reset;
-      }
-
-      # highlight release names
-      for (i=10; i<=12; i++) {
-        for (j=1; j<=4; j++) {
-          release=i "." j "-STABLE";
-          replacement=yellow release reset;
-          gsub(release,replacement);
-
-          for (k=1; k<=9; k++) {
-            release=i "." j "-RELEASE-p" k;
-            replacement=yellow release reset;
-            gsub(release,replacement);
-          }
-        }
       }
     }
 
