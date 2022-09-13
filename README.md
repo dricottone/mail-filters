@@ -35,9 +35,9 @@ to,~.@lists.ubuntu.com        =/usr/local/bin/parcels
 to,~.@lists.debian.org        =/usr/local/bin/parcels | /usr/local/share/mail-filters/debian.awk
 from,~.@freebsd.org           =/usr/local/bin/parcels | /usr/local/share/mail-filters/freebsd.awk
 from,~.+@googlegroups.com     =/usr/local/bin/parcels | /usr/local/share/mail-filters/googlegroups.awk
-from,~.+@lists.archlinux.org  =/usr/local/share/mail-filters/mailman.sh
-from,~.+@python.org           =/usr/local/share/mail-filters/mailman.sh
-from,~.+@gnu.org              =/usr/local/share/mail-filters/mailman.sh
+from,~.+@lists.archlinux.org  =/usr/local/bin/digestion
+from,~.+@python.org           =/usr/local/bin/digestion
+from,~.+@gnu.org              =/usr/local/bin/digestion
 text/*                        =/usr/local/bin/parcels
 ```
 
@@ -71,21 +71,17 @@ elif grep --quiet -e '^From:.*@freebsd.org' "$TMP"; then
 elif grep --quiet -e '^From:.*@googlegroups.com' "$TMP"; then
   cat "$TMP" | /usr/local/bin/parcels | /usr/local/share/mail-filters/googlegroups.awk
 elif grep --quiet -e '^From:.*@archlinux.org' "$TMP"; then
-  cat "$TMP" | /usr/local/share/mail-filters/mailman.sh
+  cat "$TMP" | /usr/local/bin/digestion
 elif grep --quiet -e '^From:.*@python.org' "$TMP"; then
-  cat "$TMP" | /usr/local/share/mail-filters/mailman.sh
+  cat "$TMP" | /usr/local/bin/digestion
 elif grep --quiet -e '^From:.*@gnu.org' "$TMP"; then
-  cat "$TMP" | /usr/local/share/mail-filters/mailman.sh
+  cat "$TMP" | /usr/local/bin/digestion
 else
   cat "$TMP" | /usr/local/bin/parcels
 fi
 
 rm -f "$TMP"
 ```
-
-`mailman.sh` is a simple wrapper around `digestion` that gracefully handles the
-that binary being unavailable. Meanwhile `parcels` is critical to using these
-mail filters, so it is mandatory.
 
 ## License
 
